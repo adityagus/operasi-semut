@@ -1,140 +1,87 @@
 <template>
-  <div>
-    <Navbar 
-      @openLogin="showLogin = true" 
-      @openBlog="showBlogManagement = true"
-    />
+  <div id="app">
+    <!-- Show Navbar only on non-admin routes -->
+    <Transition name="fade" mode="out-in">
+      <Navbar 
+        v-if="!isAdminRoute"
+        @openLogin="navigateToLogin"
+      />
+    </Transition>
     
-    <Hero 
-      @openRelawan="showRelawan = true" 
-      @openKolaborasi="showKolaborasi = true"
-    />
+    <!-- Router View with Transition -->
+    <router-view v-slot="{ Component, route }">
+      <Transition name="page" mode="out-in">
+        <KeepAlive :include="['HomeView']">
+          <component :is="Component" :key="route.path" />
+        </KeepAlive>
+      </Transition>
+    </router-view>
     
-    <ScrollAnimated>
-      <Kolaborasi />
-    </ScrollAnimated>
-    
-    <ScrollAnimated>
-      <RuangAksi />
-    </ScrollAnimated>
-    
-    <ScrollAnimated>
-      <VisiMisiSlider />
-    </ScrollAnimated>
-    
-    <ScrollAnimated>
-      <AnimatedStat />
-    </ScrollAnimated>
-    
-    <ScrollAnimated>
-      <Edukasi />
-    </ScrollAnimated>
-    
-    <ScrollAnimated>
-      <Testimoni @openCollaborations="showAllCollaborations = true" />
-    </ScrollAnimated>
-    
-    <ScrollAnimated>
-      <Blog />
-    </ScrollAnimated>
-    
-    <ScrollAnimated>
-      <Faq />
-    </ScrollAnimated>
-    
-    <Footer />
-    
-    <!-- Modals -->
-    <DaftarRelawan 
-      :isOpen="showRelawan" 
-      @close="showRelawan = false"
-      @submit="handleRelawanSubmit"
-    />
-    
-    <DaftarKolaborasi 
-      :isOpen="showKolaborasi" 
-      @close="showKolaborasi = false"
-      @submit="handleKolaborasiSubmit"
-    />
-    
-    <LoginModal 
-      :isOpen="showLogin" 
-      @close="showLogin = false"
-      @login="handleLogin"
-      @signup="handleSignup"
-    />
-    
-    <AllCollaborations 
-      :isOpen="showAllCollaborations" 
-      @close="showAllCollaborations = false"
-    />
-    
-    <BlogManagement 
-      :isOpen="showBlogManagement" 
-      @close="showBlogManagement = false"
-      @viewBlog="viewBlogDetail"
-    />
-    
-    <BlogDetail 
-      :isOpen="showBlogDetail" 
-      :blog="selectedBlog"
-      @close="showBlogDetail = false"
-    />
+    <!-- Show Footer only on non-admin routes -->
+    <Transition name="fade" mode="out-in">
+      <Footer v-if="!isAdminRoute" />
+    </Transition>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import Navbar from './components/Navbar.vue';
-import Hero from './components/Hero.vue';
-import ScrollAnimated from './components/ScrollAnimated.vue';
-import VisiMisiSlider from './components/VisiMisiSlider.vue';
-import AnimatedStat from './components/AnimatedStat.vue';
-import Kolaborasi from './components/Kolaborasi.vue';
-import RuangAksi from './components/RuangAksi.vue';
-import Edukasi from './components/Edukasi.vue';
-import Testimoni from './components/Testimoni.vue';
-import Blog from './components/Blog.vue';
-import Faq from './components/Faq.vue';
-import Footer from './components/Footer.vue';
-import DaftarRelawan from './components/DaftarRelawan.vue';
-import DaftarKolaborasi from './components/DaftarKolaborasi.vue';
-import LoginModal from './components/LoginModal.vue';
-import AllCollaborations from './components/AllCollaborations.vue';
-import BlogManagement from './components/BlogManagement.vue';
-import BlogDetail from './components/BlogDetail.vue';
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import Navbar from './components/Navbar.vue'
+import Footer from './components/Footer.vue'
 
-const showRelawan = ref(false);
-const showKolaborasi = ref(false);
-const showLogin = ref(false);
-const showAllCollaborations = ref(false);
-const showBlogManagement = ref(false);
-const showBlogDetail = ref(false);
-const selectedBlog = ref(null);
+const route = useRoute()
+const router = useRouter()
 
-const handleRelawanSubmit = (data) => {
-  console.log('Pendaftaran Relawan:', data);
-  alert('Terima kasih telah mendaftar sebagai relawan!');
-};
+const isAdminRoute = computed(() => {
+  return route.path.startsWith('/admin') || route.path === '/login'
+})
 
-const handleKolaborasiSubmit = (data) => {
-  console.log('Pengajuan Kolaborasi:', data);
-  alert('Terima kasih! Proposal kolaborasi Anda akan segera kami review.');
-};
-
-const handleLogin = (data) => {
-  console.log('Login:', data);
-  alert('Login berhasil!');
-};
-
-const handleSignup = (data) => {
-  console.log('Sign Up:', data);
-  alert('Akun berhasil dibuat!');
-};
-
-const viewBlogDetail = (blog) => {
-  selectedBlog.value = blog;
-  showBlogManagement.value = false;
-  showBlogDetail.value = true;
-};
+const navigateToLogin = () => {
+  router.push('/login')
+}
 </script>
+
+<style>
+/* Prevent layout shift */
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Smooth page transitions */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* Fade transitions for navbar/footer */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Prevent content jump */
+.fade-enter-active,
+.fade-leave-active,
+.page-enter-active,
+.page-leave-active {
+  will-change: opacity, transform;
+}
+</style>

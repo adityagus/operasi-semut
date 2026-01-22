@@ -35,7 +35,7 @@ const visiMisi = [
   {
     title: 'Misi',
     desc: '1. Mengedukasi masyarakat tentang pentingnya kebersihan lingkungan\n2. Mendorong aksi nyata melalui kolaborasi lintas komunitas dan sektor\n3. Mengembangkan inovasi pengelolaan sampah dan daur ulang\n4. Membentuk budaya peduli lingkungan yang berkelanjutan',
-    img: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b41?auto=format&fit=crop&w=400&q=80',
+    img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
   },
 ];
 

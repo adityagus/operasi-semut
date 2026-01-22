@@ -22,12 +22,13 @@
         </div>
         <div class="flex-1">
           <div class="flex flex-wrap gap-6 items-center justify-center">
-            <img src="https://source.unsplash.com/random/100x40?sig=1" alt="Logo 1" class="h-10 object-contain grayscale hover:grayscale-0 transition" />
+             <img v-for="n in 6" :key="n" :src="`src/assets/logo-kolaborasi-${n}.png`" alt="Logo Kolaborasi" class="h-10 object-contain grayscale hover:grayscale-0 transition" />
+            <!-- <img src="https://source.unsplash.com/random/100x40?sig=1" alt="Logo 1" class="h-10 object-contain grayscale hover:grayscale-0 transition" />
             <img src="https://source.unsplash.com/random/100x40?sig=2" alt="Logo 2" class="h-10 object-contain grayscale hover:grayscale-0 transition" />
             <img src="https://source.unsplash.com/random/100x40?sig=3" alt="Logo 3" class="h-10 object-contain grayscale hover:grayscale-0 transition" />
             <img src="https://source.unsplash.com/random/100x40?sig=4" alt="Logo 4" class="h-10 object-contain grayscale hover:grayscale-0 transition" />
             <img src="https://source.unsplash.com/random/100x40?sig=5" alt="Logo 5" class="h-10 object-contain grayscale hover:grayscale-0 transition" />
-            <img src="https://source.unsplash.com/random/100x40?sig=6" alt="Logo 6" class="h-10 object-contain grayscale hover:grayscale-0 transition" />
+            <img src="https://source.unsplash.com/random/100x40?sig=6" alt="Logo 6" class="h-10 object-contain grayscale hover:grayscale-0 transition" /> -->
           </div>
           <div class="text-center mt-6">
             <button @click="$emit('openCollaborations')" class="text-red-600 font-semibold hover:text-red-700">Meet all collaborations →</button>

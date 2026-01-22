@@ -34,9 +34,9 @@
 import { ref } from 'vue';
 const faqs = [
   { q: 'Apa itu Operasi Semut?', a: 'Operasi Semut adalah gerakan kolektif untuk menjaga kebersihan lingkungan.' },
-  { q: 'Kapan dan di mana Operasi Semut dilaksanakan?', a: 'Aksi dilakukan di berbagai lokasi secara berkala.' },
+  { q: 'Dimana dan kapan Operasi Semut dilaksanakan?', a: 'Aksi dilakukan di Bundaran HI, Jakarta setiap Minggu pagi jam 7.' },
   { q: 'Siapa saja yang bisa ikut Operasi Semut?', a: 'Siapa saja yang peduli lingkungan dapat bergabung.' },
-  { q: 'Apa yang perlu dibawa saat mengikuti kegiatan?', a: 'Bawa semangat, alat kebersihan, dan perlengkapan pribadi.' },
+  { q: 'Apa yang perlu dibawa saat mengikuti kegiatan?', a: 'Bawa semangat dan kemauan untuk dapat bersih-bersih.' },
 ];
 const open = ref(null);
 function toggle(i) { open.value = open.value === i ? null : i; }
