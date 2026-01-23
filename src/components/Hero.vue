@@ -3,48 +3,42 @@
     <!-- Carousel Container -->
     <div class="relative">
       <!-- Slides -->
-      <TransitionGroup mode='out-in' class='duration-1000 ease-in transition'>
-        <div 
-          v-for="(slide, index) in slides" 
-          :key="index"
-          v-show="currentSlide === index"
-          class="container mx-auto flex flex-col-reverse md:flex-row items-center justify-between px-6"
-        >
+      <Transition name="slide" mode="out-in">
+        <div :key="currentSlide" class="container mx-auto flex flex-col-reverse md:flex-row items-center justify-between px-6 hero-slide-fixed-height">
           <!-- Content -->
-            <div class="max-w-xl w-full text-center md:text-left">
+          <div class="max-w-xl w-full text-center md:text-left">
             <transition name="fade-text" mode="out-in">
-                <h1 v-if="currentSlide === index" :key="'title-' + index" class="text-3xl md:text-5xl font-bold mb-3 md:mb-6 leading-tight text-center md:text-left">
-                {{ slide.title }} <span class="text-red-600">{{ slide.highlight }}</span>
+              <h1 :key="'title-' + currentSlide" class="text-3xl md:text-5xl font-bold mb-3 md:mb-6 leading-tight text-center md:text-left">
+                {{ slides[currentSlide].title }} <span class="text-red-600">{{ slides[currentSlide].highlight }}</span>
               </h1>
             </transition>
             <transition name="fade-text" mode="out-in">
-                <p v-if="currentSlide === index" :key="'desc-' + index" class="mb-8 text-gray-600 text-md text-center md:text-left">
-                {{ slide.description }}
+              <p :key="'desc-' + currentSlide" class="mb-8 text-gray-600 text-md text-center md:text-left">
+                {{ slides[currentSlide].description }}
               </p>
             </transition>
-                <div v-if="currentSlide === index" :key="'btns-' + index" class="flex gap-4 justify-center md:justify-start">
-                <button @click="$emit('openRelawan')" class="px-4 py-2 md:px-6 md:py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 font-semibold transition-all transform hover:scale-105">
-                  Daftar Relawan
-                </button>
-                <button @click="$emit('openKolaborasi')" class="px-4 py-2 md:px-6 md:py-3 border-2 border-red-600 text-red-600 rounded-lg hover:bg-red-600 hover:text-white font-semibold transition-all transform hover:scale-105">
-                  Daftar Kolaborasi
-                </button>
-              </div>
+            <div :key="'btns-' + currentSlide" class="flex gap-4 justify-center md:justify-start">
+              <button @click="$emit('openRelawan')" class="px-4 py-2 md:px-6 md:py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 font-semibold transition-all transform hover:scale-105">
+                Daftar Relawan
+              </button>
+              <button @click="$emit('openKolaborasi')" class="px-4 py-2 md:px-6 md:py-3 border-2 border-red-600 text-red-600 rounded-lg hover:bg-red-600 hover:text-white font-semibold transition-all transform hover:scale-105">
+                Daftar Kolaborasi
+              </button>
+            </div>
           </div>
           <!-- Image -->
           <div class="md:mt-0 relative">
             <transition name="fade-img" mode="out-in">
               <img 
-                v-if="currentSlide === index"
-                :key="'img-' + index"
-                :src="`/assets/carousel-${index + 1}.png`" 
-                :alt="slide.alt"
+                :key="'img-' + currentSlide"
+                :src="`/assets/carousel-${currentSlide + 1}.png`" 
+                :alt="slides[currentSlide].alt"
                 class="w-64 h-64 md:w-full md:h-full object-cover transition-transform duration-500 hover:scale-105" 
               />
             </transition>
           </div>
         </div>
-      </TransitionGroup>
+      </Transition>
 
       <!-- Navigation Arrows -->
       <!-- <button 
@@ -138,6 +132,10 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* Prevent layout shift: fix min-height to the max slide height */
+.hero-slide-fixed-height {
+  min-height: 420px; /* Sesuaikan dengan tinggi maksimal konten/gambar carousel */
+}
 /* Slide Transitions */
 .slide-enter-active,
 .slide-leave-active {
