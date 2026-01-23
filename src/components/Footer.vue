@@ -2,7 +2,7 @@
   <footer class="bg-gray-900 text-white py-10 mt-12">
     <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
       <div>
-        <div class="font-bold text-lg mb-2 flex items-center"><img src="@/assets/logo.png" alt="Operasi Semut" class="h-8 mr-2 rounded-full"/>Operasi Semut</div>
+        <div class="font-bold text-lg mb-2 flex items-center"><img src="/assets/logo.png" alt="Operasi Semut" class="h-8 mr-2 rounded-full"/>Operasi Semut</div>
         <div class="text-xs text-gray-400">Copyright &copy; 2026 Operasi Semut.<br/>All rights reserved.</div>
         <div class="flex space-x-2 mt-2">
           <a href="#"><i class="fab fa-facebook"></i></a>

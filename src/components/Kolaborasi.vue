@@ -4,7 +4,7 @@
       <h2 class="text-center text-2xl font-bold mb-8">Kolaborasi Kami</h2>
       <p class="text-center text-gray-500 mb-8">Kami telah meraih kolaborasi dengan 20+ perusahaan dan yayasan</p>
       <div class="flex flex-wrap justify-center gap-8">
-        <img v-for="n in 6" :key="n" :src="`@/assets/logo-kolaborasi-${n}.png`" alt="Logo Kolaborasi" class="w-24 h-12 object-contain rounded bg-gray-50" />
+        <img v-for="n in 6" :key="n" :src="`/assets/logo-kolaborasi-${n}.png`" alt="Logo Kolaborasi" class="w-24 h-12 object-contain rounded bg-gray-50" />
       </div>
     </div>
   </section>

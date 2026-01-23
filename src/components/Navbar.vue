@@ -2,7 +2,7 @@
   <nav class="bg-white shadow p-4 flex items-center justify-between px-4 md:px-16 relative">
     <div class="font-bold text-lg text-red-600 flex items-center">
       <img
-        src="@/assets/logo.png"
+        src="/assets/logo.png"
         alt="Operasi Semut"
         class="h-8 mr-2 rounded-full" />
     </div>
