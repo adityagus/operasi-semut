@@ -22,7 +22,7 @@
         </div>
         <div class="flex-1">
           <div class="flex flex-wrap gap-6 items-center justify-center">
-             <img v-for="n in 6" :key="n" :src="`src/assets/logo-kolaborasi-${n}.png`" alt="Logo Kolaborasi" class="h-10 object-contain grayscale hover:grayscale-0 transition" />
+             <img v-for="n in 6" :key="n" :src="`/assets/logo-kolaborasi-${n}.png`" alt="Logo Kolaborasi" class="h-10 object-contain grayscale hover:grayscale-0 transition" />
             <!-- <img src="https://source.unsplash.com/random/100x40?sig=1" alt="Logo 1" class="h-10 object-contain grayscale hover:grayscale-0 transition" />
             <img src="https://source.unsplash.com/random/100x40?sig=2" alt="Logo 2" class="h-10 object-contain grayscale hover:grayscale-0 transition" />
             <img src="https://source.unsplash.com/random/100x40?sig=3" alt="Logo 3" class="h-10 object-contain grayscale hover:grayscale-0 transition" />

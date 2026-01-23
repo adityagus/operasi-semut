@@ -37,7 +37,7 @@
               <img 
                 v-if="currentSlide === index"
                 :key="'img-' + index"
-                :src="`/src/assets/carousel-${index + 1}.png`" 
+                :src="`@/assets/carousel-${index + 1}.png`" 
                 :alt="slide.alt"
                 class="w-64 h-64 md:w-full md:h-full object-cover transition-transform duration-500 hover:scale-105" 
               />
